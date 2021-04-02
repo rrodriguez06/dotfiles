@@ -1,16 +1,11 @@
-if !exists('g:vscode')
-    let g:nvim_config_root = expand('<sfile>:p:h')
-    let g:vim_plug_fpath = expand(stdpath('data') . '/site/autoload/plug.vim')
+let g:nvim_config_root = expand('<sfile>:p:h')
+let g:vim_plug_fpath = expand(stdpath('data') . '/site/autoload/plug.vim')
 
-    call plug#begin()
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'deoplete-plugins/deoplete-clang'
-    Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-    Plug 'Shougo/neco-vim', { 'for': 'vim' }
-    Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-    Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
-    Plug 'jeetsukumaran/vim-pythonsense'
-    Plug 'machakann/vim-swap'
+call plug#begin()
+
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-lua/completion-nvim'
+    Plug 'aca/completion-tabnine', { 'do': './install.sh' }
 
     Plug 'justinmk/vim-sneak'
     Plug 'romainl/vim-cool'
@@ -22,6 +17,8 @@ if !exists('g:vscode')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'mhinz/vim-startify'
+
+    Plug 'luochen1990/rainbow'
 
     Plug 'itchyny/vim-highlighturl'
 
@@ -43,139 +40,193 @@ if !exists('g:vscode')
 
     Plug 'michaeljsmith/vim-indent-object'
 
-    Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-
     Plug 'scrooloose/nerdtree'
 
     Plug 'x4m3/vim-epitech'
 
-    call plug#end()
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 
-    let mapleader = ','
+    Plug 'preservim/nerdcommenter'
 
-    nmap <silent> <leader>q :NERDTreeToggle<CR>
-    nmap <silent> <leader>h :TekAddHeader<CR>
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'romgrk/barbar.nvim'
 
-    set tabstop=4
-    set shiftwidth=4
-    set softtabstop=4
-    set expandtab
+    Plug 'voldikss/vim-floaterm'
+    "Plug 'tibabit/vim-templates'
 
-    set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》
+    Plug 'kdheepak/lazygit.nvim'
 
-    set number relativenumber
+call plug#end()
 
-    set mouse=a
+let mapleader = ','
 
-    set undofile
+nmap <silent> <leader>q :NERDTreeToggle<CR>
+nmap <silent> <leader>h :TekAddHeader<CR>
 
-    set background=dark
-    let g:gruvbox_italics=1
-    let g:gruvbox_italicize_strings=1
-    let g:gruvbox_filetype_hi_groups = 0
-    let g:gruvbox_plugin_hi_groups = 0
-    colorscheme gruvbox8
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
 
-    """""""""""" PLUGINS SETTINGS """"""""""""
-    let g:deoplete#enable_at_startup = 1
-    call deoplete#custom#source('_', 'max_menu_width', 80)
-    call deoplete#custom#source('_', 'min_pattern_length', 1)
-    call deoplete#custom#source('_', { 'filetype': ['python'], 'disabled_syntaxes': ['Comment'] })
-    call deoplete#custom#option('ignore_sources', { '_': ['around', 'buffer', 'tag'] })
-    call deoplete#custom#option('max_list', 30)
-    call deoplete#custom#option('num_processes', 16)
-    call deoplete#custom#option('auto_complete_delay', 100)
-    call deoplete#custom#option('auto_complete', v:true)
+set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》
 
-    let g:UltiSnipsExpandTrigger='<c-j>'
-    let g:UltiSnipsEnableSnipMate = 0
-    let g:UltiSnipsJumpForwardTrigger='<c-j>'
-    let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-    let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
+set number relativenumber
 
-    let g:deoplete#sources#jedi#show_docstring = 0
-    let g:deoplete#sources#jedi#server_timeout = 50
-    let g:deoplete#sources#jedi#ignore_errors = 1
+set mouse=a
 
-    let g:jedi#completions_enabled = 0
-    let g:jedi#show_call_signatures = '0'
+set undofile
 
-    let g:sneak#label = 1
-    nmap f <Plug>Sneak_s
-    xmap f <Plug>Sneak_s
-    onoremap <silent> f :call sneak#wrap(v:operator, 2, 0, 1, 1)<CR>
-    nmap F <Plug>Sneak_S
-    xmap F <Plug>Sneak_S
-    onoremap <silent> F :call sneak#wrap(v:operator, 2, 1, 1, 1)<CR>
-    let g:sneak#s_next = 1
+set termguicolors
 
-    nmap n <Plug>(anzu-n-with-echo)zzzv
-    nmap N <Plug>(anzu-N-with-echo)zzzv
-    let g:anzu_search_limit = 500000
-    let g:anzu_status_format = '/%p [%i/%l]'
+set background=dark
 
-    nmap *  <Plug>(asterisk-z*)
-    nmap #  <Plug>(asterisk-z#)
-    xmap *  <Plug>(asterisk-z*)
-    xmap #  <Plug>(asterisk-z#)
-
-    nnoremap <silent> <Space>t :TagbarToggle<CR>
-    let g:md_ctags_bin=fnamemodify(g:nvim_config_root.'/tools/markdown2ctags.py', ':p')
-    let g:tagbar_type_markdown = {'ctagstype': 'markdown', 'ctagsbin' : g:md_ctags_bin, 'ctagsargs' : '-f - --sort=yes', 'kinds' : [ 's:sections', 'i:images' ], 'sro' : '|', 'kind2scope' : { 's' : 'section', }, 'sort': 0, }
-
-    let g:auto_save = 1
-    let g:auto_save_events = ['InsertLeave', 'TextChanged']
-    let g:auto_save_silent = 0
-
-    let g:ale_linters = { 'python': ['pylint'], 'vim': ['vint'], 'cpp': ['clang'], 'c': ['clang'] }
-    let g:ale_linters_explicit = 1
-    let g:ale_sign_error = 'x'
-    let g:ale_sign_warning = '!'
-
-    let g:neoformat_enabled_python = ['black', 'yapf']
-    let g:neoformat_cpp_clangformat = { 'exe': 'clang-format', 'args': ['--style="{IndentWidth: 4}"'] }
-    let g:neoformat_c_clangformat = { 'exe': 'clang-format', 'args': ['--style="{IndentWidth: 4}"'] }
-    let g:neoformat_enabled_cpp = ['clangformat']
-    let g:neoformat_enabled_c = ['clangformat']
-
-    let g:signify_vcs_list = [ 'git' ]
-    let g:signify_sign_change = '~'
-
-
-    let g:airline_theme = 'term'
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-    let g:airline#extensions#tabline#buffer_nr_show = 1
-    let g:airline#extensions#tabline#buffer_nr_format = '%s. '
-    let g:airline#extensions#tagbar#enabled = 1
-    let g:airline#extensions#vista#enabled = 1
-    let g:airline#extensions#anzu#enabled = 0
-    let g:airline_skip_empty_sections = 1
-    let g:airline_powerline_fonts = 0
-    if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
-    endif
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.spell = 'Ꞩ'
-    let g:airline#extensions#hunks#non_zero_only = 1
-    let g:airline_highlighting_cache = 1
-
-    if exists('g:started_by_firenvim') && g:started_by_firenvim
-        set laststatus=0 nonumber noruler noshowcmd
-        let g:firenvim_config = { 'globalSettings': { 'alt': 'all',  }, 'localSettings': { '.*': { 'cmdline': 'neovim', 'priority': 0, 'selector': 'textarea', 'takeover': 'never', }, } }
-        augroup firenvim
-            autocmd!
-            autocmd BufEnter *.txt setlocal filetype=markdown
-        augroup END
-    endif
-else
-    set tabstop=4
-    set shiftwidth=4
-    set softtabstop=4
-    set expandtab
-    
-    let mapleader = ','
-    
-    colorscheme gruvbox8
+let g:gruvbox_italics=1
+let g:gruvbox_italicize_strings=1
+let g:gruvbox_filetype_hi_groups = 0
+let g:gruvbox_plugin_hi_groups = 0
+let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
+let g:gruvbox_invert_selection='0'
+colorscheme gruvbox8
+
+nnoremap <silent> <A-down> :m+<cr>==
+nnoremap <silent> <A-up> :m-2<cr>==
+
+"""""""""""" PLUGINS SETTINGS """"""""""""
+
+let g:rainbow_active = 1
+
+let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsEnableSnipMate = 0
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
+
+let g:sneak#label = 1
+nmap f <Plug>Sneak_s
+xmap f <Plug>Sneak_s
+onoremap <silent> f :call sneak#wrap(v:operator, 2, 0, 1, 1)<CR>
+nmap F <Plug>Sneak_S
+xmap F <Plug>Sneak_S
+onoremap <silent> F :call sneak#wrap(v:operator, 2, 1, 1, 1)<CR>
+let g:sneak#s_next = 1
+
+nmap n <Plug>(anzu-n-with-echo)zzzv
+nmap N <Plug>(anzu-N-with-echo)zzzv
+let g:anzu_search_limit = 500000
+let g:anzu_status_format = '/%p [%i/%l]'
+
+nmap *  <Plug>(asterisk-z*)
+nmap #  <Plug>(asterisk-z#)
+xmap *  <Plug>(asterisk-z*)
+xmap #  <Plug>(asterisk-z#)
+
+nnoremap <silent> <Space>t :TagbarToggle<CR>
+let g:md_ctags_bin=fnamemodify(g:nvim_config_root.'/tools/markdown2ctags.py', ':p')
+let g:tagbar_type_markdown = {'ctagstype': 'markdown', 'ctagsbin' : g:md_ctags_bin, 'ctagsargs' : '-f - --sort=yes', 'kinds' : [ 's:sections', 'i:images' ], 'sro' : '|', 'kind2scope' : { 's' : 'section', }, 'sort': 0, }
+
+let g:auto_save = 1
+let g:auto_save_events = ['InsertLeave', 'TextChanged']
+let g:auto_save_silent = 0
+
+let g:ale_linters = { 'python': ['pylint'], 'vim': ['vint'], 'cpp': ['clang'], 'c': ['clang'] }
+let g:ale_linters_explicit = 1
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '!'
+
+let g:neoformat_enabled_python = ['black', 'yapf']
+let g:neoformat_cpp_clangformat = { 'exe': 'clang-format', 'args': ['--style="{IndentWidth: 4}"'] }
+let g:neoformat_c_clangformat = { 'exe': 'clang-format', 'args': ['--style="{IndentWidth: 4}"'] }
+let g:neoformat_enabled_cpp = ['clangformat']
+let g:neoformat_enabled_c = ['clangformat']
+
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_sign_change = '~'
+
+let g:airline_theme = 'term'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_format = '%s. '
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#vista#enabled = 1
+let g:airline#extensions#anzu#enabled = 0
+let g:airline_skip_empty_sections = 1
+let g:airline_powerline_fonts = 0
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline_highlighting_cache = 1
+
+if exists('g:started_by_firenvim') && g:started_by_firenvim
+    set laststatus=0 nonumber noruler noshowcmd
+    let g:firenvim_config = { 'globalSettings': { 'alt': 'all',  }, 'localSettings': { '.*': { 'cmdline': 'neovim', 'priority': 0, 'selector': 'textarea', 'takeover': 'never', }, } }
+    augroup firenvim
+        autocmd!
+        autocmd BufEnter *.txt setlocal filetype=markdown
+    augroup END
+endif
+
+let g:completion_chain_complete_list = {
+    \ 'default': [
+    \   {'complete_items': ['lsp', 'snipet', 'tabnine' ]},
+    \   {'mode': '<c-p>'},
+    \   {'mode': '<c-n>'}
+    \]
+\}
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+"nnoremap <silent> <C-left> :bp<cr>
+"nnoremap <silent> <C-right> :bn<cr>
+"nnoremap <silent> <C-q> :bd<cr>
+
+nnoremap <silent> <C-s> :BufferPick<cr>
+
+nnoremap <silent> <Space>bd :BufferOrderByDirectory<cr>
+nnoremap <silent> <Space>bl :BufferOrderByLanguage<cr>
+
+nnoremap <silent> <C-left> :BufferPrevious<cr>
+nnoremap <silent> <C-right> :BufferNext<cr>
+
+nnoremap <silent> <C-q> :BufferClose<cr>
+
+nnoremap <silent> <A-t> :FloatermToggle<cr>
+
+
+nnoremap <silent> <leader>lg :LazyGit<cr>
+
+let g:lazygit_floating_window_winblend = 0 " transparency of floating window
+let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
+let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
+let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
+let g:lazygit_use_neovim_remote = 0
+
+"""""""""""" LSP SETTINGS """"""""""""
+
+set completeopt=menuone,noinsert,noselect
+
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.vimls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.flow.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.html.setup{ on_attach=require'completion'.on_attach }
+autocmd BufEnter * lua require'completion'.on_attach()
