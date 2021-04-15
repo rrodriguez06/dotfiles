@@ -2,7 +2,6 @@ let g:nvim_config_root = expand('<sfile>:p:h')
 let g:vim_plug_fpath = expand(stdpath('data') . '/site/autoload/plug.vim')
 
 call plug#begin()
-
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/completion-nvim'
     Plug 'aca/completion-tabnine', { 'do': './install.sh' }
@@ -58,13 +57,19 @@ call plug#begin()
 
     Plug 'kdheepak/lazygit.nvim'
 
+    Plug 'cometsong/CommentFrame.vim'
+
 call plug#end()
+
+
+"------------------------------------------------------------------------------"
+"                            NEOVIM SPECIFIC CONFIG                            "
+"------------------------------------------------------------------------------"
 
 let mapleader = ','
 
-nmap <silent> <leader>q :NERDTreeToggle<CR>
-nmap <silent> <leader>h :TekAddHeader<CR>
 
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ System variables ~~~~~
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -82,6 +87,8 @@ set termguicolors
 
 set background=dark
 
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Colorscheme configurations ~~~~~
 let g:gruvbox_italics=1
 let g:gruvbox_italicize_strings=1
 let g:gruvbox_filetype_hi_groups = 0
@@ -97,9 +104,16 @@ colorscheme gruvbox8
 nnoremap <silent> <A-down> :m+<cr>==
 nnoremap <silent> <A-up> :m-2<cr>==
 
-"""""""""""" PLUGINS SETTINGS """"""""""""
+
+"------------------------------------------------------------------------------"
+"                               PLUGINS SETTINGS                               "
+"------------------------------------------------------------------------------"
 
 let g:rainbow_active = 1
+
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Snipets ~~~~~
 
 let g:UltiSnipsExpandTrigger='<c-j>'
 let g:UltiSnipsEnableSnipMate = 0
@@ -126,6 +140,9 @@ nmap #  <Plug>(asterisk-z#)
 xmap *  <Plug>(asterisk-z*)
 xmap #  <Plug>(asterisk-z#)
 
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Tagbar ~~~~~
+
 nnoremap <silent> <Space>t :TagbarToggle<CR>
 let g:md_ctags_bin=fnamemodify(g:nvim_config_root.'/tools/markdown2ctags.py', ':p')
 let g:tagbar_type_markdown = {'ctagstype': 'markdown', 'ctagsbin' : g:md_ctags_bin, 'ctagsargs' : '-f - --sort=yes', 'kinds' : [ 's:sections', 'i:images' ], 'sro' : '|', 'kind2scope' : { 's' : 'section', }, 'sort': 0, }
@@ -134,10 +151,18 @@ let g:auto_save = 1
 let g:auto_save_events = ['InsertLeave', 'TextChanged']
 let g:auto_save_silent = 0
 
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Ale ~~~~~
+
 let g:ale_linters = { 'python': ['pylint'], 'vim': ['vint'], 'cpp': ['clang'], 'c': ['clang'] }
 let g:ale_linters_explicit = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '!'
+
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Neoformat ~~~~~
 
 let g:neoformat_enabled_python = ['black', 'yapf']
 let g:neoformat_cpp_clangformat = { 'exe': 'clang-format', 'args': ['--style="{IndentWidth: 4}"'] }
@@ -147,6 +172,10 @@ let g:neoformat_enabled_c = ['clangformat']
 
 let g:signify_vcs_list = [ 'git' ]
 let g:signify_sign_change = '~'
+
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Airline ~~~~~
 
 let g:airline_theme = 'term'
 let g:airline#extensions#tabline#enabled = 1
@@ -167,6 +196,10 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline_highlighting_cache = 1
 
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Completion ~~~~~
+
 if exists('g:started_by_firenvim') && g:started_by_firenvim
     set laststatus=0 nonumber noruler noshowcmd
     let g:firenvim_config = { 'globalSettings': { 'alt': 'all',  }, 'localSettings': { '.*': { 'cmdline': 'neovim', 'priority': 0, 'selector': 'textarea', 'takeover': 'never', }, } }
@@ -184,14 +217,15 @@ let g:completion_chain_complete_list = {
     \]
 \}
 
+
+"------------------------------------------------------------------------------"
+"                                   SHORTCUTS                                  "
+"------------------------------------------------------------------------------"
+
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-"nnoremap <silent> <C-left> :bp<cr>
-"nnoremap <silent> <C-right> :bn<cr>
-"nnoremap <silent> <C-q> :bd<cr>
 
 nnoremap <silent> <C-s> :BufferPick<cr>
 
@@ -205,6 +239,8 @@ nnoremap <silent> <C-q> :BufferClose<cr>
 
 nnoremap <silent> <A-t> :FloatermToggle<cr>
 
+nmap <silent> <leader>q :NERDTreeToggle<CR>
+nmap <silent> <leader>h :TekAddHeader<CR>
 
 nnoremap <silent> <leader>lg :LazyGit<cr>
 
@@ -212,9 +248,12 @@ let g:lazygit_floating_window_winblend = 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
 let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
 let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
-let g:lazygit_use_neovim_remote = 0
+"let g:lazygit_use_neovim_remote = 0
 
-"""""""""""" LSP SETTINGS """"""""""""
+
+"------------------------------------------------------------------------------"
+"                                 LSP SETTINGS                                 "
+"------------------------------------------------------------------------------"
 
 set completeopt=menuone,noinsert,noselect
 
@@ -223,10 +262,63 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ LSP generic config ~~~~~
+
 lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.vimls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.flow.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.html.setup{ on_attach=require'completion'.on_attach }
+"lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GOPLS specific config ~~~~~
+lua <<EOF
+  lspconfig = require "lspconfig"
+  lspconfig.gopls.setup {
+    cmd = {"gopls", "serve"},
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+  }
+
+  function goimports(timeout_ms)
+    local context = { source = { organizeImports = true } }
+    vim.validate { context = { context, "t", true } }
+
+    local params = vim.lsp.util.make_range_params()
+    params.context = context
+
+    -- See the implementation of the textDocument/codeAction callback
+    -- (lua/vim/lsp/handler.lua) for how to do this properly.
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
+    if not result or next(result) == nil then return end
+    local actions = result[1].result
+    if not actions then return end
+    local action = actions[1]
+
+    -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
+    -- is a CodeAction, it can have either an edit, a command or both. Edits
+    -- should be executed first.
+    if action.edit or type(action.command) == "table" then
+      if action.edit then
+        vim.lsp.util.apply_workspace_edit(action.edit)
+      end
+      if type(action.command) == "table" then
+        vim.lsp.buf.execute_command(action.command)
+      end
+    else
+      vim.lsp.buf.execute_command(action)
+    end
+  end
+EOF
+
 autocmd BufEnter * lua require'completion'.on_attach()
+autocmd BufWritePre *.go lua goimports(1000)
