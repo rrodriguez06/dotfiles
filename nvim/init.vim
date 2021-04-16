@@ -59,6 +59,8 @@ call plug#begin()
 
     Plug 'cometsong/CommentFrame.vim'
 
+    Plug 'junegunn/goyo.vim'
+
 call plug#end()
 
 
@@ -66,10 +68,11 @@ call plug#end()
 "                            NEOVIM SPECIFIC CONFIG                            "
 "------------------------------------------------------------------------------"
 
-let mapleader = ','
-
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ System variables ~~~~~
+
+let mapleader = ','
+
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -89,6 +92,7 @@ set background=dark
 
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Colorscheme configurations ~~~~~
+
 let g:gruvbox_italics=1
 let g:gruvbox_italicize_strings=1
 let g:gruvbox_filetype_hi_groups = 0
@@ -243,6 +247,8 @@ nmap <silent> <leader>q :NERDTreeToggle<CR>
 nmap <silent> <leader>h :TekAddHeader<CR>
 
 nnoremap <silent> <leader>lg :LazyGit<cr>
+
+nnoremap <silent> <leader>g :Goyo<cr>
 
 let g:lazygit_floating_window_winblend = 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
