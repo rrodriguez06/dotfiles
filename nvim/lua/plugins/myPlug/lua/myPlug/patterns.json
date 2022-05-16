@@ -1,0 +1,8 @@
+{
+    "php": {
+        "get_func": "public function get_%s()",
+        "set_func": "public function set_%s($%s)",
+        "get_corpse": "return $this->$%s;",
+        "set_corpse": "$this->$%s = $%s;"
+    }
+}
