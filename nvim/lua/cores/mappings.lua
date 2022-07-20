@@ -39,6 +39,7 @@
 
 -- map("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
 vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fr', '<cmd>Telescope oldfiles<CR>', { noremap = true, silent = true })
 -- map("n", "<leader>fg", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
 vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope current_buffer_fuzzy_find<CR>', { noremap = true, silent = true })
 -- map("n", "<leader>rr", "<cmd>Telescope live_grep<CR>")
@@ -47,6 +48,8 @@ vim.api.nvim_set_keymap('n', '<leader>rr', '<cmd>Telescope live_grep<CR>', { nor
 vim.api.nvim_set_keymap('n', '\\\\', '<cmd>Telescope buffers<CR>', { noremap = true, silent = true })
 -- map("n", ";;", "<cmd>Telescope help_tags<CR>")
 vim.api.nvim_set_keymap('n', ';;', '<cmd>Telescope help_tags<CR>', { noremap = true, silent = true })
+-- map("n", ";t", "<cmd>Telescope project<CR>")
+vim.api.nvim_set_keymap('n', '<leader>fp', '<cmd>Telescope project<CR>', { noremap = true, silent = true })
 
 -- map("n", "<leader>lg", ":LazyGit<CR>");
 vim.api.nvim_set_keymap('n', '<leader>lg', ':LazyGit<CR>', { noremap = true, silent = true })

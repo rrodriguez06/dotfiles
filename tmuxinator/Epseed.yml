@@ -1,0 +1,34 @@
+name: Epseed
+root: ~/Desktop/Epseed
+
+windows:
+  - main_server:
+      layout: cadd,185x57,0,0{133x57,0,0,0,51x57,134,0[51x12,134,0,1,51x44,134,13,2]}
+      panes:
+        - nvim:
+          - cd ./Main_Server
+          - nvim .
+        - clock:
+          - cd ./Main_Server
+          - c
+        - term:
+          - cd ./Main_Server
+          - c
+  - root:
+      layout: cadd,185x57,0,0{133x57,0,0,0,51x57,134,0[51x12,134,0,1,51x44,134,13,2]}
+      panes:
+        - nvim:
+          - nvim .
+        - clock:
+          - c
+        - term:
+          - c
+  - tester:
+      layout: 9b20,185x57,0,0{92x57,0,0,0,92x57,93,0,1}
+      panes:
+        - bin:
+          - cd Main_Server/bin
+          - c
+        - tests:
+          - cd Main_Server/tests
+          - c

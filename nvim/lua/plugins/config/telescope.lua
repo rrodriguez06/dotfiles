@@ -1,3 +1,5 @@
+local telescope = require('telescope')
+
 local config = {
     defaults = {
         vimgrep_arguments = {
@@ -9,7 +11,7 @@ local config = {
             "--column",
             "--smart-case",
         },
-        prompt_prefix = " �  ",
+        prompt_prefix = "> ",
         selection_caret = "  ",
         entry_prefix = "  ",
         initial_mode = "insert",
@@ -18,7 +20,7 @@ local config = {
         layout_strategy = "horizontal",
         layout_config = {
             horizontal = {
-                prompt_position = "top",
+                prompt_position = "bottom",
                 preview_width = 0.55,
                 result_width = 0.8,
             },
@@ -42,9 +44,9 @@ local config = {
         file_previewer = require("telescope.previewers").vim_buffer_cat.new,
         grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-
         buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
     },
 }
 
-require("telescope").setup(config)
+telescope.load_extension('project')
+telescope.setup(config)

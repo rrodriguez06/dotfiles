@@ -82,7 +82,7 @@ return require('packer').startup(function()
 
     use 'simrat39/symbols-outline.nvim'
 
-    use 'pseewald/vim-anyfold'
+    -- use 'pseewald/vim-anyfold'
 
     use { 'anuvyklack/pretty-fold.nvim', requires = 'anuvyklack/nvim-keymap-amend' }
 
