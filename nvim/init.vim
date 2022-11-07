@@ -2,43 +2,37 @@ set termguicolors
 
 :lua require('plugins/plug')
 
-let g:sonokai_style = 'atlantis'
-let g:sonokai_enale_italic = 1
-let g:sonokai_spell_foreground ='colored'
-let g:sonokai_diagnostic_text_highlight = 1
-let g:sonokai_diagnostic_line_highlight = 1
-
-syntax enable
-colorscheme sonokai
-set background=dark
-
-" filetype plugin indent on
-" autocmd Filetype * AnyFoldActivate
-" augroup anyfold
-"   autocmd!
-"   autocmd Filetype * AnyFoldActivate
-" augroup END
-
-" set foldlevel=99
-
-
-":lua require('plugins/packerInit')
-":lua require('plugins/plugins')
-
-:lua require('plugins/config/feline')
-:lua require('plugins/config/gitsigns')
-:lua require('plugins/config/lazygit')
-:lua require('plugins/config/lsp')
-:lua require('plugins/config/nvimtree')
-" :lua require('plugins/config/sniprun')
+" :lua require('plugins/config/coc')
+:lua require('plugins/config/hop')
+:lua require('plugins/config/comment')
 :lua require('plugins/config/telescope')
 :lua require('plugins/config/treesitter')
-:lua require('plugins/config/comment')
-:lua require('plugins/config/symbols_outline')
-" :lua require('plugins/config/prettyfold')
-:lua require('plugins/config/alpha')
 
 :lua require('cores/options')
 :lua require('cores/mappings')
 
+filetype plugin indent on
+
+syntax on
+colorscheme palenight
+set background=dark
+
+filetype plugin on
+
 inoremap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#error_symbol = 'Err: '
+let g:airline#extensions#coc#warning_symbol = 'Warn: '
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+let g:airline_powerline_fonts = 1
+
+let NERDTreeQuitOnOpen=1
+
+let ayucolor = "mirage"

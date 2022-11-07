@@ -62,38 +62,11 @@ opt.completeopt = { "menuone", "noinsert", "noselect" }
 -- vim.cmd("colorscheme aquarium")
 
 
--- opt.foldmethod = "expr"
--- opt.foldexpr = "nvim_treesitter#foldexpr()"
-
--- local M = {}
-
--- function M.nvim_create_augroups(definitions)
---     for group_name, definition in pairs(definitions) do
---         api.nvim_command('augroup ' .. group_name)
---         api.nvim_command('autocmd!')
---         for _, def in ipairs(definition) do
---             local command = table.concat(vim.tbl_flatten { 'autocmd', def }, ' ')
---             api.nvim_command(command)
---         end
---         api.nvim_command('augroup END')
---     end
--- end
-
--- local autoCommands = {
---     open_folds = {
---         { "BufReadPost,FileReadPost", "*", "normal zR" }
---     }
--- }
-
--- M.nvim_create_augroups(autoCommands)
-
-
-
 
 g.mapleader = ","
 
-g.auto_save = 1
-g.auto_save_events = { "InsertLeave", "TextChanged" }
+-- g.auto_save = 1
+-- g.auto_save_events = { "InsertLeave", "TextChanged" }
 
 g.copilot_no_tab_map = true
 

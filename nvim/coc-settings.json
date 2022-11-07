@@ -1,0 +1,27 @@
+{
+    "coc.preferences.extensionUpdateCheck": "weekly",
+    "coc.preferences.enableMessageDialog": true,
+    "dialog.floatBorderHighlight": "FloatBorder",
+    "suggest.floatConfig": {
+        "border": true,
+        "borderhighlight": "FloatBorder",
+        "rounded": true
+    },
+    "hover.floatConfig": {
+        "border": true,
+        "borderhighlight": "FloatBorder",
+        "rounded": true
+    },
+    "signature.floatConfig": {
+        "border": true,
+        "borderhighlight": "FloatBorder",
+        "rounded": true
+    },
+    "diagnostic.floatConfig": {
+        "border": true,
+        "borderhighlight": "FloatBorder",
+        "rounded": true
+    },
+    "Lua.diagnostics.globals": ["vim"],
+    "Lua.runtime.version": "LuaJIT"
+}
