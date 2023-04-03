@@ -38,4 +38,10 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
     Plug('nvim-treesitter/nvim-treesitter')
 
+    Plug('lukas-reineke/indent-blankline.nvim')
+
+    Plug('anuvyklack/pretty-fold.nvim')
+
+    Plug('ThePrimeagen/harpoon')
+
 vim.call('plug#end')

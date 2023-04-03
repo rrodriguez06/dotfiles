@@ -49,4 +49,5 @@ local config = {
 }
 
 telescope.load_extension('project')
+telescope.load_extension('harpoon')
 telescope.setup(config)

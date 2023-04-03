@@ -1,4 +1,8 @@
 {
+    "diagnostic.errorSign": " ",
+    "diagnostic.warningSign": " ",
+    "diagnostic.infoSign": " ",
+    "diagnostic.hintSign": " ",
     "coc.preferences.extensionUpdateCheck": "weekly",
     "coc.preferences.enableMessageDialog": true,
     "dialog.floatBorderHighlight": "FloatBorder",
@@ -23,5 +27,31 @@
         "rounded": true
     },
     "Lua.diagnostics.globals": ["vim"],
-    "Lua.runtime.version": "LuaJIT"
+    "Lua.runtime.version": "LuaJIT",
+    "suggest.completionItemKindLabels": {
+        "method": "",
+        "function": "",
+        "constructor": "",
+        "field": "ﰠ",
+        "variable": "",
+        "class": "ﴯ",
+        "interface": "",
+        "module": "",
+        "property": "ﰠ",
+        "unit": "塞",
+        "value": "",
+        "enum": "",
+        "keyword": "",
+        "snippet": "",
+        "text": "",
+        "color": "",
+        "file": "",
+        "reference": "",
+        "folder": "",
+        "enumMember": "",
+        "constant": "",
+        "struct": "פּ",
+        "event": "",
+        "operator": ""
+    }
 }

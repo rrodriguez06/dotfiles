@@ -61,6 +61,9 @@ opt.completeopt = { "menuone", "noinsert", "noselect" }
 
 -- vim.cmd("colorscheme aquarium")
 
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 
 
 g.mapleader = ","
