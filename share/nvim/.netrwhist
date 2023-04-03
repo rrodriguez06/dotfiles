@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/Users/rromain/.config/nvim'
+let g:netrw_dirhist_8='/Users/rromain'
+let g:netrw_dirhist_7='/Users/rromain/.config'
+let g:netrw_dirhist_6='/Users/rromain/.config/nvim'
+let g:netrw_dirhist_5='/'
+let g:netrw_dirhist_4='/Users'
+let g:netrw_dirhist_3='/Users/rromain'
+let g:netrw_dirhist_2='/Users/rromain/.config'
+let g:netrw_dirhist_1='/Users/rromain/.config/nvim'
